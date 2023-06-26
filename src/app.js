@@ -12,20 +12,24 @@ console.log('initial')
 
 app.post("/sign-up", (req, res) => {
     const newuser = req.body;
+    if(newuser.username && newuser.avatar && typeof newuser.username == "string" && typeof newuser.avatar == "string"){
     usuarios.push(newuser);
-    res.send(usuarios);
+    res.sendStatus(201).send(usuarios);}
+    else{res.sendStatus(400).send('Todos os campos são obrigatórios!')}
 })
 
 app.post("/tweets", (req, res) => {
     const newtweet = req.body;
+    if(newtweet.username && newtweet.tweet && typeof newtweet.username == "string" && typeof newtweet.tweet == "string"){
     const findUser = usuarios.find(user => user.username === newtweet.username);
     if (!findUser) {
-        res.send('UNAUTHORIZED');
+        res.sendStatus(401).send('UNAUTHORIZED');
     }
     else {
         tweets.push(newtweet);
-        res.send('OK');
-    }
+        res.sendStatus(201).send('OK');
+    }}
+    else{res.sendStatus(400).send('Todos os campos são obrigatórios!')}
 })
 
 
