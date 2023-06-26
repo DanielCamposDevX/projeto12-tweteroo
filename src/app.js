@@ -71,7 +71,7 @@ app.get(`/tweets/:usern`), (req,res) => {
         }
         else{}
     }
-    res.send(usertweets);
+    res.sendStatus(200).send(usertweets);
 }
 
 
